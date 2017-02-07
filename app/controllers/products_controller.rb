@@ -41,6 +41,14 @@ class ProductsController < ApplicationController
       redirect_to products_url
     end
 
+    def show
+      @product = Product.find(params[:id])
+
+      if current_user
+        @review = @product.reviews.build
+      end
+    end
+
     private
     def product_params
       params.require(:product).permit(:name, :description, :price_in_cents)
